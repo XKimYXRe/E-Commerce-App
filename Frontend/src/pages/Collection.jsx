@@ -74,7 +74,7 @@ const Collection = () => {
       applyFilter();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, subCategory, search, showSearch])
+  }, [category, subCategory, search, showSearch, products])
 
   useEffect(() => {
     sortProduct();
