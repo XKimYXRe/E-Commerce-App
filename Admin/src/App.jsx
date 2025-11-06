@@ -13,14 +13,13 @@ export const currency = "$"
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token") ? localStorage.getItem("token") : "");
   const navigate = useNavigate();
-  const prevTokenRef = useRef(localStorage.getItem("token") || ""); // conserve la valeur initiale
+  const prevTokenRef = useRef(localStorage.getItem("token") || "");
 
-  // persist token whenever it change
   useEffect(() => {
     localStorage.setItem("token", token);
   }, [token]);
 
-  // redirect only when token transitions from empty -> non-empty (i.e. just logged in)
+  
   useEffect(() => {
     if (!prevTokenRef.current && token) {
       navigate("/orders");

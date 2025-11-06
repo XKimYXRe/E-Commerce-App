@@ -67,27 +67,47 @@ const PlaceOrder = () => {
 
       switch (method) {
         // API CALLS for COD
-
         case "cod": {
-          const response = await axios.post(backendUrl + "/api/order/place", orderData, {headers: {token}})
+          const response = await axios.post(
+            backendUrl + "/api/order/place",
+            orderData,
+            { headers: { token } }
+          );
           console.log(response.data);
-          
 
           if (response.data.success) {
-            setCartItems({})
-            navigate("/orders")
+            setCartItems({});
+            navigate("/orders");
           } else {
-            toast.error(response.data.message)
+            toast.error(response.data.message);
           }
           break;
         }
+
+        case "stripe":
+          {
+            const responseStripe = await axios.post(
+              backendUrl + "/api/order/stripe",
+              orderData,
+              { headers: { token } }
+            );
+
+            if (responseStripe.data.success) {
+              const { session_url } = responseStripe.data;
+              window.location.replace(session_url);
+            } else {
+              toast.error(responseStripe.data.message);
+            }
+          }
+
+          break;
 
         default:
           break;
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message)
+      toast.error(error.message);
     }
   };
 
