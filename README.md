@@ -99,4 +99,4 @@ The project is configured for Vercel deployment. Each directory contains a `verc
 
 ## License
 
-Specify your project license here.
+This project is licensed under the MIT License.
